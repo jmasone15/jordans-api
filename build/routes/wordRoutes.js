@@ -17,8 +17,30 @@ const express_1 = require("express");
 const router = (0, express_1.Router)();
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const allWords = yield Word_1.default.find({});
+        const allWords = yield Word_1.default.find({ common: true });
         res.status(200).json(allWords);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json(error);
+    }
+}));
+router.get("/single", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const allWords = yield Word_1.default.find({ common: true });
+        const randomWord = allWords[Math.floor(Math.random() * allWords.length)];
+        res.status(200).json(randomWord);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json(error);
+    }
+}));
+router.get("/valid/:word", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const targetWord = yield Word_1.default.findOne({ word: req.params.word });
+        const result = targetWord === null ? false : true;
+        res.status(200).json(result);
     }
     catch (error) {
         console.error(error);
@@ -29,7 +51,7 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const newWord = new Word_1.default({
             word: req.body.word,
-            common: true
+            common: req.body.common === "common"
         });
         yield newWord.save();
         res.status(200).json(newWord);
