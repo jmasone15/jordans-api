@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import wordRoutes from "./routes/wordRoutes";
+import linkRoutes from "./routes/linkRoutes";
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("tiny"));
 
 app.use("/word", wordRoutes);
+app.use("/l", linkRoutes);
 
 app.listen(PORT, async () => {
     try {
