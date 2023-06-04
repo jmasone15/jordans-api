@@ -1,6 +1,5 @@
 import Word, { IWord } from "../models/Word";
 import { Router, Request, Response } from "express";
-import cors from "cors";
 
 const router: Router = Router();
 
@@ -15,7 +14,7 @@ router.get("/", async (req: Request, res: Response) => {
     }
 });
 
-router.get("/single", cors(), async (req: Request, res: Response) => {
+router.get("/single", async (req: Request, res: Response) => {
     try {
         const allWords = await Word.find({ common: true });
 
@@ -28,7 +27,7 @@ router.get("/single", cors(), async (req: Request, res: Response) => {
     }
 });
 
-router.get("/valid/:word", cors(), async (req: Request, res: Response) => {
+router.get("/valid/:word", async (req: Request, res: Response) => {
     try {
         const targetWord = await Word.findOne({ word: req.params.word });
         const result = targetWord === null ? false : true;

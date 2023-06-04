@@ -14,10 +14,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const Link_1 = __importDefault(require("../models/Link"));
 const express_1 = require("express");
-const cors_1 = __importDefault(require("cors"));
 const router = (0, express_1.Router)();
-const corsPostOptions = {};
-router.get("/:key", (0, cors_1.default)(), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get("/:key", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const targetLink = yield Link_1.default.findOne({ key: req.params.key });
         if (!targetLink) {
@@ -32,8 +30,9 @@ router.get("/:key", (0, cors_1.default)(), (req, res) => __awaiter(void 0, void 
         res.status(500).json(error);
     }
 }));
-router.post("/", (0, cors_1.default)(), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        console.log(req.body);
         const newLink = new Link_1.default({
             target: req.body.target,
             key: req.body.key,

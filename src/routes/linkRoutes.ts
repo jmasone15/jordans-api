@@ -1,11 +1,9 @@
 import Link, { ILink } from "../models/Link";
 import { Router, Request, Response } from "express";
-import cors from "cors";
 
 const router: Router = Router();
-const corsPostOptions = {};
 
-router.get("/:key", cors(), async (req: Request, res: Response) => {
+router.get("/:key", async (req: Request, res: Response) => {
     try {
         const targetLink = await Link.findOne({ key: req.params.key });
 
@@ -20,8 +18,10 @@ router.get("/:key", cors(), async (req: Request, res: Response) => {
     }
 });
 
-router.post("/", cors(), async (req: Request, res: Response) => {
+router.post("/", async (req: Request, res: Response) => {
     try {
+        console.log(req.body);
+
         const newLink = new Link<ILink>({
             target: req.body.target,
             key: req.body.key,

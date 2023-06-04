@@ -14,7 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const Word_1 = __importDefault(require("../models/Word"));
 const express_1 = require("express");
-const cors_1 = __importDefault(require("cors"));
 const router = (0, express_1.Router)();
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -26,7 +25,7 @@ router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(500).json(error);
     }
 }));
-router.get("/single", (0, cors_1.default)(), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get("/single", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const allWords = yield Word_1.default.find({ common: true });
         const randomWord = allWords[Math.floor(Math.random() * allWords.length)];
@@ -37,7 +36,7 @@ router.get("/single", (0, cors_1.default)(), (req, res) => __awaiter(void 0, voi
         res.status(500).json(error);
     }
 }));
-router.get("/valid/:word", (0, cors_1.default)(), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get("/valid/:word", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const targetWord = yield Word_1.default.findOne({ word: req.params.word });
         const result = targetWord === null ? false : true;

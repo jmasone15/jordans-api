@@ -3,6 +3,7 @@ import express, { Express } from "express";
 import mongoose from "mongoose";
 import morgan from "morgan";
 import dotenv from "dotenv";
+import cors from "cors";
 import wordRoutes from "./routes/wordRoutes";
 import linkRoutes from "./routes/linkRoutes";
 
@@ -15,6 +16,7 @@ const PORT: string = process.env.PORT || "3001";
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("tiny"));
+app.use(cors());
 
 app.use("/word", wordRoutes);
 app.use("/l", linkRoutes);
