@@ -10,7 +10,7 @@ router.get("/:key", async (req: Request, res: Response) => {
         if (!targetLink) {
             res.status(401).json({ message: "Not found" });
         } else {
-            res.redirect(targetLink.target);
+            res.redirect("https://" + targetLink.target);
         }
     } catch (error) {
         console.error(error);

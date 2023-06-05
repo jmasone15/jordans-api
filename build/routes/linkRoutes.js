@@ -22,7 +22,7 @@ router.get("/:key", (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             res.status(401).json({ message: "Not found" });
         }
         else {
-            res.redirect(targetLink.target);
+            res.redirect("https://" + targetLink.target);
         }
     }
     catch (error) {
